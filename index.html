@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Daily Dose of Motivation</title>
+    <title>A Little Message For You</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap');
+        /* Import a clean, modern font */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
         :root {
-            --background-color: #f4f4f9;
-            --card-background: #ffffff;
-            --text-color: #333333;
-            --author-color: #555555;
-            --shadow-color: rgba(0, 0, 0, 0.1);
+            --card-background: rgba(255, 255, 255, 0.9);
+            --text-color: #1d3557; 
+            --author-color: #457b9d;
+            --shadow-color: rgba(29, 53, 87, 0.2);
         }
 
         body {
-            font-family: 'Merriweather', serif;
-            background-color: var(--background-color);
+            font-family: 'Inter', sans-serif;
+            /* The background is now set by JavaScript */
             color: var(--text-color);
             display: flex;
             justify-content: center;
@@ -26,40 +26,66 @@
             margin: 0;
             padding: 20px;
             box-sizing: border-box;
+            transition: background 1s ease; /* Smooth transition for the background */
+            overflow: hidden;
         }
 
         main {
+            position: relative;
             background-color: var(--card-background);
-            border-radius: 12px;
-            box-shadow: 0 8px 30px var(--shadow-color);
-            padding: 40px;
-            max-width: 600px;
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px var(--shadow-color);
+            padding: 40px 50px;
+            max-width: 650px;
             width: 100%;
             text-align: center;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            animation: fadeInCard 0.8s ease-out forwards;
         }
         
         main:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 45px var(--shadow-color);
         }
 
         #quote-text {
-            font-size: 1.75em;
-            line-height: 1.5;
-            margin-bottom: 20px;
+            font-size: 1.9em;
+            line-height: 1.6;
+            margin-bottom: 25px;
             font-weight: 400;
         }
 
         #quote-author {
-            font-size: 1.1em;
-            font-style: italic;
-            font-weight: 700;
+            font-size: 1.2em;
+            font-weight: 500;
             color: var(--author-color);
             margin-top: 0;
         }
         
         #quote-author::before {
             content: "— ";
+        }
+        
+        @keyframes fadeInCard {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @media (max-width: 600px) {
+            #quote-text {
+                font-size: 1.6em;
+            }
+            main {
+                padding: 35px 30px;
+            }
         }
 
     </style>
@@ -73,24 +99,102 @@
 
     <script>
         const quotes = [
-            { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
-            { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
-            { text: "The journey of a thousand miles begins with a single step.", author: "Lao Tzu" },
-            { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" },
-            { text: "Strive not to be a success, but rather to be of value.", author: "Albert Einstein" },
-            { text: "Everything you’ve ever wanted is on the other side of fear.", author: "George Addair" },
-            { text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt" },
-            { text: "It does not matter how slowly you go as long as you do not stop.", author: "Confucius" },
-            { text: "What you get by achieving your goals is not as important as what you become by achieving your goals.", author: "Zig Ziglar" },
-            { text: "You miss 100% of the shots you don't take.", author: "Wayne Gretzky" }
+            // Your full list of quotes goes here...
+            // For You, Right Now
+            { text: "Just in case you forgot today: You matter. You are loved. You are worthy. You are magical.", author: "A Timely Reminder" },
+            { text: "You've survived 100% of your worst days. You're doing great.", author: "Your Own Track Record" },
+            { text: "What is coming is better than what is gone.", author: "Your Future" },
+            { text: "This is the sign you were looking for.", author: "The Universe" },
+            { text: "Trust the timing of your life. You are exactly where you need to be.", author: "Patience" },
+            { text: "The universe is conspiring in your favor.", author: "Good Energy" },
+            { text: "You are not behind. You are not ahead. You are exactly on your own path.", author: "Your Journey" },
+            { text: "Breathe. You're going to be okay.", author: "A Calm Moment" },
+            { text: "Just for now, without asking how, let yourself be.", author: "Danna Faulds" },
+            { text: "You are stronger than you think.", author: "Your Inner Strength" },
+
+            // More Funny Stuff
+            { text: "Adulting is like looking both ways before you cross the street and then getting hit by an airplane.", author: "Modern Life" },
+            { text: "If we're not meant to have midnight snacks, why is there a light in the fridge?", author: "A Legitimate Question" },
+            { text: "My favorite exercise is a cross between a lunge and a crunch... I call it lunch.", author: "Fitness Goals" },
+            { text: "Life is not a fairy tale. If you lose your shoe at midnight, you're probably drunk.", author: "Reality" },
+            { text: "Some days I amaze myself. Other days I look for my phone while I'm talking on it.", author: "Human Nature" },
+            { text: "The only marathon I'm running is the one on Netflix.", author: "An Honest Athlete" },
+            { text: "I whisper 'what the heck?' to myself at least 20 times a day.", author: "An Inner Monologue" },
+            { text: "Remember, if you can't be a good example, you'll just have to be a horrible warning.", author: "A Public Service" },
+
+            // Permission Slips
+            { text: "Reminder: Rest is a productive part of your process.", author: "Your Well-Being" },
+            { text: "You are allowed to be both a masterpiece and a work in progress, simultaneously.", author: "A Gentle Truth" },
+            { text: "It's okay to not be okay today.", author: "Permission Granted" },
+            { text: "You don't have to have it all figured out to move forward.", author: "One Step at a Time" },
+            { text: "Let it be okay for things to be simple.", author: "Your Peace of Mind" },
+            { text: "You are allowed to take up space.", author: "A Basic Right" },
+            { text: "You have permission to change your mind.", author: "Growth" },
+            { text: "It's okay to outgrow people, places, and things.", author: "Your Evolution" },
+            { text: "Saying 'no' can be the ultimate self-care.", author: "Your Boundaries" },
+            { text: "Let go of who you think you're supposed to be and be who you are.", author: "Brené Brown" },
+
+            // Shared Human Truths (Funny & Relatable)
+            { text: "My brain has too many tabs open.", author: "All of Us" },
+            { text: "Welcome to adulthood. I hope you like ibuprofen and not knowing what to cook for dinner.", author: "The Welcome Committee" },
+            { text: "My wallet is like an onion. Opening it makes me cry.", author: "A Modern Tragedy" },
+            { text: "I'm not lazy, I'm on energy-saving mode.", author: "A Modern Thinker" },
+            { text: "I'm not weird, I'm a limited edition.", author: "Your T-Shirt" },
+            { text: "Of course I talk to myself. Sometimes I need expert advice.", author: "Inner Dialogue" },
+            { text: "Be careful when you follow the masses. Sometimes the 'm' is silent.", author: "A Witty Observation" },
+            { text: "I followed my heart and it led me to the fridge.", author: "A Love Story" },
+            { text: "Maybe she's born with it, maybe it's the coffee.", author: "The Morning Rush" },
+            { text: "It's a 'add to cart' kind of day.", author: "Retail Therapy" },
+
+            // A Little Nudge
+            { text: "One day, or day one. You decide.", author: "Your Choice" },
+            { text: "Start where you are. Use what you have. Do what you can.", author: "Arthur Ashe" },
+            { text: "The best time for new beginnings is now.", author: "The Present Moment" },
+            { text: "A little progress each day adds up to big results.", author: "The Compound Effect" },
+            { text: "Stop doubting yourself. Work hard and make it happen.", author: "Your Potential" },
+            { text: "Be the reason someone smiles today.", author: "A Simple Mission" },
+            { text: "The secret of getting ahead is getting started.", author: "Mark Twain" },
+            { text: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
+            { text: "Do something today that your future self will thank you for.", author: "Wise Counsel" },
+            { text: "If you get tired, learn to rest, not to quit.", author: "Banksy" },
+
+            // Simple Joys & Good Vibes
+            { text: "Collect beautiful moments.", author: "A Life Well Lived" },
+            { text: "Throw kindness around like confetti.", author: "A Party Starter" },
+            { text: "Let your weird light shine bright so the other weirdos know where to find you.", author: "Your Tribe" },
+            { text: "Find the magic in the mundane.", author: "A Daily Practice" },
+            { text: "Be the energy you want to attract.", author: "The Law of the Universe" },
+            { text: "Keep your face to the sunshine and you cannot see a shadow.", author: "Helen Keller" },
+            { text: "In a world where you can be anything, be kind.", author: "A Moral Compass" },
+            { text: "Choose happy.", author: "A Simple Mantra" },
+            { text: "Do more things that make you forget to check your phone.", author: "A Worthy Goal" },
+            { text: "Life is short. Make it sweet.", author: "A Good Recipe" }
+        ];
+
+        // A list of beautiful gradients to choose from
+        const gradients = [
+            { c1: '#fbc2eb', c2: '#a6c1ee' }, // Pink to Blue
+            { c1: '#84fab0', c2: '#8fd3f4' }, // Green to Blue
+            { c1: '#a1c4fd', c2: '#c2e9fb' }, // Light Blue to Sky Blue
+            { c1: '#d4fc79', c2: '#96e6a1' }, // Lime to Green
+            { c1: '#fccb90', c2: '#d57eeb' }, // Orange to Purple
+            { c1: '#ff9a9e', c2: '#fecfef' }, // Red to Pink
+            { c1: '#cfd9df', c2: '#e2ebf0' }, // Soft Grey
+            { c1: '#667eea', c2: '#764ba2' }, // Royal Blue to Purple
+            { c1: '#ffecd2', c2: '#fcb69f' }, // Peach to Orange
+            { c1: '#a8edea', c2: '#fed6e3' }  // Teal to Pink
         ];
 
         document.addEventListener('DOMContentLoaded', () => {
             const quoteTextElement = document.getElementById('quote-text');
             const quoteAuthorElement = document.getElementById('quote-author');
             
-            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            // --- NEW: Select and apply a random gradient ---
+            const randomGradient = gradients[Math.floor(Math.random() * gradients.length)];
+            document.body.style.background = `linear-gradient(135deg, ${randomGradient.c1} 0%, ${randomGradient.c2} 100%)`;
             
+            // --- Display a random quote (same as before) ---
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
             quoteTextElement.textContent = randomQuote.text;
             quoteAuthorElement.textContent = randomQuote.author;
         });

@@ -13,11 +13,12 @@
             --text-color: #1d3557; 
             --author-color: #457b9d;
             --shadow-color: rgba(29, 53, 87, 0.2);
+            /* UPDATED: Color now matches the QR code frame for brand consistency */
+            --brand-color: #6a0dad; 
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            /* The background is now set by JavaScript */
             color: var(--text-color);
             display: flex;
             justify-content: center;
@@ -26,7 +27,7 @@
             margin: 0;
             padding: 20px;
             box-sizing: border-box;
-            transition: background 1s ease; /* Smooth transition for the background */
+            transition: background 1s ease;
             overflow: hidden;
         }
 
@@ -62,12 +63,24 @@
             font-weight: 500;
             color: var(--author-color);
             margin-top: 0;
+            margin-bottom: 30px; /* Space before the footer */
         }
         
         #quote-author::before {
             content: "— ";
         }
         
+        /* Styling for the Scan & Smile Footer */
+        .brand-footer {
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            padding-top: 20px;
+            font-weight: 700;
+            font-size: 0.9em;
+            color: var(--brand-color);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
         @keyframes fadeInCard {
             from {
                 opacity: 0;
@@ -95,12 +108,15 @@
     <main>
         <p id="quote-text">Loading quote...</p>
         <p id="quote-author"></p>
+
+        <footer class="brand-footer">
+            Scan & Smile
+        </footer>
     </main>
 
     <script>
         const quotes = [
-            // Your full list of quotes goes here...
-            // For You, Right Now
+            // Your full list of quotes is here...
             { text: "Just in case you forgot today: You matter. You are loved. You are worthy. You are magical.", author: "A Timely Reminder" },
             { text: "You've survived 100% of your worst days. You're doing great.", author: "Your Own Track Record" },
             { text: "What is coming is better than what is gone.", author: "Your Future" },
@@ -111,8 +127,6 @@
             { text: "Breathe. You're going to be okay.", author: "A Calm Moment" },
             { text: "Just for now, without asking how, let yourself be.", author: "Danna Faulds" },
             { text: "You are stronger than you think.", author: "Your Inner Strength" },
-
-            // More Funny Stuff
             { text: "Adulting is like looking both ways before you cross the street and then getting hit by an airplane.", author: "Modern Life" },
             { text: "If we're not meant to have midnight snacks, why is there a light in the fridge?", author: "A Legitimate Question" },
             { text: "My favorite exercise is a cross between a lunge and a crunch... I call it lunch.", author: "Fitness Goals" },
@@ -121,8 +135,6 @@
             { text: "The only marathon I'm running is the one on Netflix.", author: "An Honest Athlete" },
             { text: "I whisper 'what the heck?' to myself at least 20 times a day.", author: "An Inner Monologue" },
             { text: "Remember, if you can't be a good example, you'll just have to be a horrible warning.", author: "A Public Service" },
-
-            // Permission Slips
             { text: "Reminder: Rest is a productive part of your process.", author: "Your Well-Being" },
             { text: "You are allowed to be both a masterpiece and a work in progress, simultaneously.", author: "A Gentle Truth" },
             { text: "It's okay to not be okay today.", author: "Permission Granted" },
@@ -133,8 +145,6 @@
             { text: "It's okay to outgrow people, places, and things.", author: "Your Evolution" },
             { text: "Saying 'no' can be the ultimate self-care.", author: "Your Boundaries" },
             { text: "Let go of who you think you're supposed to be and be who you are.", author: "Brené Brown" },
-
-            // Shared Human Truths (Funny & Relatable)
             { text: "My brain has too many tabs open.", author: "All of Us" },
             { text: "Welcome to adulthood. I hope you like ibuprofen and not knowing what to cook for dinner.", author: "The Welcome Committee" },
             { text: "My wallet is like an onion. Opening it makes me cry.", author: "A Modern Tragedy" },
@@ -145,8 +155,6 @@
             { text: "I followed my heart and it led me to the fridge.", author: "A Love Story" },
             { text: "Maybe she's born with it, maybe it's the coffee.", author: "The Morning Rush" },
             { text: "It's a 'add to cart' kind of day.", author: "Retail Therapy" },
-
-            // A Little Nudge
             { text: "One day, or day one. You decide.", author: "Your Choice" },
             { text: "Start where you are. Use what you have. Do what you can.", author: "Arthur Ashe" },
             { text: "The best time for new beginnings is now.", author: "The Present Moment" },
@@ -157,8 +165,6 @@
             { text: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
             { text: "Do something today that your future self will thank you for.", author: "Wise Counsel" },
             { text: "If you get tired, learn to rest, not to quit.", author: "Banksy" },
-
-            // Simple Joys & Good Vibes
             { text: "Collect beautiful moments.", author: "A Life Well Lived" },
             { text: "Throw kindness around like confetti.", author: "A Party Starter" },
             { text: "Let your weird light shine bright so the other weirdos know where to find you.", author: "Your Tribe" },
@@ -167,33 +173,25 @@
             { text: "Keep your face to the sunshine and you cannot see a shadow.", author: "Helen Keller" },
             { text: "In a world where you can be anything, be kind.", author: "A Moral Compass" },
             { text: "Choose happy.", author: "A Simple Mantra" },
-            { text: "Do more things that make you forget to check your phone.", author: "A Worthy Goal" },
+            { text: "Do more things that you forget to check your phone.", author: "A Worthy Goal" },
             { text: "Life is short. Make it sweet.", author: "A Good Recipe" }
         ];
 
-        // A list of beautiful gradients to choose from
         const gradients = [
-            { c1: '#fbc2eb', c2: '#a6c1ee' }, // Pink to Blue
-            { c1: '#84fab0', c2: '#8fd3f4' }, // Green to Blue
-            { c1: '#a1c4fd', c2: '#c2e9fb' }, // Light Blue to Sky Blue
-            { c1: '#d4fc79', c2: '#96e6a1' }, // Lime to Green
-            { c1: '#fccb90', c2: '#d57eeb' }, // Orange to Purple
-            { c1: '#ff9a9e', c2: '#fecfef' }, // Red to Pink
-            { c1: '#cfd9df', c2: '#e2ebf0' }, // Soft Grey
-            { c1: '#667eea', c2: '#764ba2' }, // Royal Blue to Purple
-            { c1: '#ffecd2', c2: '#fcb69f' }, // Peach to Orange
-            { c1: '#a8edea', c2: '#fed6e3' }  // Teal to Pink
+            { c1: '#fbc2eb', c2: '#a6c1ee' }, { c1: '#84fab0', c2: '#8fd3f4' },
+            { c1: '#a1c4fd', c2: '#c2e9fb' }, { c1: '#d4fc79', c2: '#96e6a1' },
+            { c1: '#fccb90', c2: '#d57eeb' }, { c1: '#ff9a9e', c2: '#fecfef' },
+            { c1: '#cfd9df', c2: '#e2ebf0' }, { c1: '#667eea', c2: '#764ba2' },
+            { c1: '#ffecd2', c2: '#fcb69f' }, { c1: '#a8edea', c2: '#fed6e3' }
         ];
 
         document.addEventListener('DOMContentLoaded', () => {
             const quoteTextElement = document.getElementById('quote-text');
             const quoteAuthorElement = document.getElementById('quote-author');
             
-            // --- NEW: Select and apply a random gradient ---
             const randomGradient = gradients[Math.floor(Math.random() * gradients.length)];
             document.body.style.background = `linear-gradient(135deg, ${randomGradient.c1} 0%, ${randomGradient.c2} 100%)`;
             
-            // --- Display a random quote (same as before) ---
             const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
             quoteTextElement.textContent = randomQuote.text;
             quoteAuthorElement.textContent = randomQuote.author;

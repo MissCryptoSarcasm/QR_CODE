@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Daily Dose of Motivation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap');
+
+        :root {
+            --background-color: #f4f4f9;
+            --card-background: #ffffff;
+            --text-color: #333333;
+            --author-color: #555555;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        main {
+            background-color: var(--card-background);
+            border-radius: 12px;
+            box-shadow: 0 8px M30px var(--shadow-color);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        main:hover {
+            transform: translateY(-5px);
+        }
+
+        #quote-text {
+            font-size: 1.75em;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        #quote-author {
+            font-size: 1.1em;
+            font-style: italic;
+            font-weight: 700;
+            color: var(--author-color);
+            margin-top: 0;
+        }
+        
+        #quote-author::before {
+            content: "— ";
+        }
+
+    </style>
+</head>
+<body>
+
+    <main>
+        <p id="quote-text">Loading quote...</p>
+        <p id="quote-author"></p>
+    </main>
+
+    <script>
+        const quotes = [
+            { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
+            { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
+            { text: "The journey of a thousand miles begins with a single step.", author: "Lao Tzu" },
+            { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" },
+            { text: "Strive not to be a success, but rather to be of value.", author: "Albert Einstein" },
+            { text: "Everything you’ve ever wanted is on the other side of fear.", author: "George Addair" },
+            { text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt" },
+            { text: "It does not matter how slowly you go as long as you do not stop.", author: "Confucius" },
+            { text: "What you get by achieving your goals is not as important as what you become by achieving your goals.", author: "Zig Ziglar" },
+            { text: "You miss 100% of the shots you don't take.", author: "Wayne Gretzky" }
+        ];
+
+        // You can add more quotes here by following the same format:
+        // { text: "Your new quote.", author: "Author's Name" },
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const quoteTextElement = document.getElementById('quote-text');
+            const quoteAuthorElement = document.getElementById('quote-author');
+            
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            
+            quoteTextElement.textContent = randomQuote.text;
+            quoteAuthorElement.textContent = randomQuote.author;
+        });
+    </script>
+
+</body>
+</html>
